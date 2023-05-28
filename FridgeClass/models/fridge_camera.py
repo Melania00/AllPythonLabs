@@ -1,8 +1,10 @@
-from FridgeClass.models.Fridge import Fridge
+from typing import Final
+
+from FridgeClass.models.fridge import Fridge
 
 
 class FridgeCamera(Fridge):
-    VOLUME_PER_KILOGRAM = 0.25
+    VOLUME_PER_KILOGRAM: Final[int] = 0.25
 
     def __init__(self, brand, model, capacity, is_defrosting, energy_efficiency_class, num_inputs, belt_drive_type,
                  belt_speed, max_weight):

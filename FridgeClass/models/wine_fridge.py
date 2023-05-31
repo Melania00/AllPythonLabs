@@ -1,8 +1,8 @@
-from FridgeClass.models.Fridge import Fridge
+from FridgeClass.models.fridge import Fridge
 
 
 class WineFridge(Fridge):
-    def __init__(self, brand, model, capacity, is_defrosting, energy_efficiency_class, max_num_bottles,
+    def __init__(self, brand: str, model, capacity, is_defrosting, energy_efficiency_class, max_num_bottles,
                  max_bottle_volume):
         super().__init__(brand, model, capacity, is_defrosting, energy_efficiency_class)
         self.max_num_bottles = max_num_bottles

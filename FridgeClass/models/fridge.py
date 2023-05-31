@@ -17,21 +17,18 @@ class Fridge(ABC):
         """
         Abstract method that should be implemented by child classes
         """
-        pass
 
     @abstractmethod
     def turn_off_defrosting(self):
         """
         Abstract method that should be implemented by child classes
         """
-        pass
 
     @abstractmethod
     def get_max_usable_capacity(self):
         """
         Abstract method that should be implemented by child classes
         """
-    pass
 
     def delete_model_info(self):
         """

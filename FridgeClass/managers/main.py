@@ -1,10 +1,20 @@
 from FridgeClass.models.fridge_camera import FridgeCamera
 from FridgeClass.models.wine_fridge import WineFridge
 from FridgeClass.managers.fridge_manager import FridgeManager
+from FridgeClass.managers.set_manager import SetManager
+
+"""
+searching for samsung fridges
+"""
 
 
 def find_samsung_fridges(self):
     return [f for f in self.fridges if f.brand == "Samsung"]
+
+
+"""
+searching for mechanic drive type
+"""
 
 
 def find_mechanical_drive_fridges(self):
@@ -12,6 +22,9 @@ def find_mechanical_drive_fridges(self):
 
 
 def main():
+    """
+    Creating fridges objects
+    """
     fridge_camera1 = FridgeCamera("Samsung", "FC1", 100, False, "A++", 2, "electrical", 3, 50)
     fridge_camera2 = FridgeCamera("LG", "FC2", 200, True, "A+", 3, "mechanical", 4, 100)
     wine_fridge1 = WineFridge("Bosch", "WF1", 50, False, "A++", 25, 0.75)
@@ -45,6 +58,10 @@ def main():
     print("\n\nMechanical Drive Fridges:")
     for fridge in find_mechanical_drive_type_fridges:
         print(fridge)
+
+    fridges_manager.print_dict_filter(str)
+
+    sm = SetManager(fridges_manager)
 
 
 if __name__ == "__main__":

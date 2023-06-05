@@ -41,7 +41,6 @@ def main():
     """
     for fridge in fridges_manager:
         print(fridge)
-
     """
     search for Samsung fridges
     """

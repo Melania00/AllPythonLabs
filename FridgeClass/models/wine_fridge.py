@@ -4,7 +4,8 @@ from FridgeClass.models.fridge import Fridge
 class WineFridge(Fridge):
     def __init__(self, brand: str, model, capacity, is_defrosting, energy_efficiency_class, max_num_bottles,
                  max_bottle_volume):
-        super().__init__(brand, model, capacity, is_defrosting, energy_efficiency_class)
+        my_special_set = {"my special fridge"}
+        super().__init__(brand, model, capacity, is_defrosting, energy_efficiency_class, my_special_set)
         self.max_num_bottles = max_num_bottles
         self.max_bottle_volume = max_bottle_volume
 

@@ -1,10 +1,17 @@
 class FridgeManager:
+    """
+    creating constructor for the class and list of obj
+    """
     def __init__(self):
         self.fridges = []
-
+    """"
+    function for adding fridges to the list
+    """
     def add_fridge(self, fridge):
         self.fridges.append(fridge)
-
+    """
+    discovering the length of obj
+    """
     def __len__(self):
         return len(self.fridges)
 
@@ -12,8 +19,10 @@ class FridgeManager:
         return self.fridges[index]
 
     def __iter__(self):
-        return iter(self.fridges)
-
+        return self
+    """
+    executing method
+    """
     def execute_method(self, method_name):
         result = [getattr(f, method_name)() for f in self.fridges if hasattr(f, method_name)]
         return result
@@ -33,6 +42,10 @@ class FridgeManager:
         return result
 
     def all_any(self, method_name):
+        """"
+        The getattr() method returns the value of the named attribute of an object.
+        The hasattr() method returns true if an object has the given named attribute and false if it does not.
+        """
         all_result = all(getattr(f, method_name)() for f in self.fridges if hasattr(f, method_name))
         any_result = any(getattr(f, method_name)() for f in self.fridges if hasattr(f, method_name))
         return {"all": all_result, "any": any_result}
@@ -59,6 +72,12 @@ class FridgeManager:
         all_result = all(f.execute_method(method_name) for f in self.fridges if hasattr(f, method_name))
         any_result = any(f.execute_method(method_name) for f in self.fridges if hasattr(f, method_name))
         return {"all": all_result, "any": any_result}
+
+    def print_dict_filter(self, _type):
+        """Print filtered dictionary."""
+        for fridge in self.fridges:
+            print(f"\n{type(fridge).__name__} {fridge.brand}")
+            print(fridge.__dict_filter__(_type))
 
     def main(self):
         pass

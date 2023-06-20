@@ -8,7 +8,8 @@ class FridgeCamera(Fridge):
 
     def __init__(self, brand, model, capacity, is_defrosting, energy_efficiency_class, num_inputs, belt_drive_type,
                  belt_speed, max_weight):
-        super().__init__(brand, model, capacity, is_defrosting, energy_efficiency_class)
+        my_special_set = {"my special super mega fridge"}
+        super().__init__(brand, model, capacity, is_defrosting, energy_efficiency_class, my_special_set)
         self.num_inputs = num_inputs
         self.belt_drive_type = belt_drive_type
         self.belt_speed = belt_speed

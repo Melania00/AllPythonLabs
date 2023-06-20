@@ -1,8 +1,10 @@
 from abc import ABC, abstractmethod
 
+from FridgeClass.exceptions.logging import FridgeCapacityError, logged
+
 
 class Fridge(ABC):
-    def __init__(self, brand, model, capacity, is_defrosting, energy_efficiency_class):
+    def __init__(self, brand, model, capacity, is_defrosting, energy_efficiency_class, my_special_set):
         """
         Initialize the attributes of the fridge object
         """
@@ -11,6 +13,7 @@ class Fridge(ABC):
         self.capacity = capacity
         self.is_defrosting = is_defrosting
         self.energy_efficiency_class = energy_efficiency_class
+        self.my_special_set = my_special_set
 
     @abstractmethod
     def turn_on_defrosting(self):
@@ -35,3 +38,18 @@ class Fridge(ABC):
         Non-abstract method that sets the model attribute to None
         """
         self.model = None
+
+    def __dict_filter__(self, _type):
+        """Filter dict keys and values by their types."""
+        result = {}
+        for key, value in self.__dict__.items():
+            if isinstance(value, _type):
+                result[key] = value
+        return result
+
+    @logged(FridgeCapacityError, mode='console')
+    def get_max_usable_capacity(self):
+        if self.capacity < 0:
+            raise FridgeCapacityError("Invalid capacity")
+        return self.capacity
+

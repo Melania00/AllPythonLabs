@@ -27,41 +27,21 @@ def main():
     """
     fridge_camera1 = FridgeCamera("Samsung", "FC1", 100, False, "A++", 2, "electrical", 3, 50)
     fridge_camera2 = FridgeCamera("LG", "FC2", 200, True, "A+", 3, "mechanical", 4, 100)
-    wine_fridge1 = WineFridge("Bosch", "WF1", 50, False, "A++", 25, 0.75)
-    wine_fridge2 = WineFridge("Samsung", "WF2", 80, True, "A++", 40, 0.75)
-
+    wine_fridge1 = WineFridge("Bosch", "WF1", 0, False, "A++", 25, 0.75)
+    wine_fridge2 = WineFridge("Samsung", "WF2", -5, True, "A++", 40, 0.75)
     fridges_manager = FridgeManager()
     fridges_manager.add_fridge(fridge_camera1)
     fridges_manager.add_fridge(fridge_camera2)
     fridges_manager.add_fridge(wine_fridge1)
     fridges_manager.add_fridge(wine_fridge2)
 
-    """
-    print all fridges
-    """
-    for fridge in fridges_manager:
-        print(fridge)
-    """
-    search for Samsung fridges
-    """
-    samsung_fridges = [f for f in fridges_manager if f.brand == "Samsung"]
-    print("\n\nSamsung Fridges:")
-    for fridge in samsung_fridges:
-        print(fridge)
+    fridges = fridges_manager.fridges
+    result = list(fridges.get_max_usable_capacity() for fridge in fridges)
+    print(result)
 
-    """
-    search for fridges with mechanical belt drive
-    """
-    find_mechanical_drive_type_fridges = [f for f in fridges_manager if
-                                          isinstance(f, FridgeCamera) and f.belt_drive_type == "mechanical"]
-    print("\n\nMechanical Drive Fridges:")
-    for fridge in find_mechanical_drive_type_fridges:
-        print(fridge)
+    result = [f"{fridge.title}: {index}" for index, fridge in enumerate(fridges)]
+    print(result)
 
-    fridges_manager.print_dict_filter(str)
-
-    sm = SetManager(fridges_manager)
-
-
-if __name__ == "__main__":
-    main()
+    fridge_connect_results = [fridge.get_max_usable_capacity() for fridge in fridges]
+    result = [f"{fridge.title}: {connect_result}" for fridge, connect_result in zip(fridges, fridge_connect_results)]
+    print(result)

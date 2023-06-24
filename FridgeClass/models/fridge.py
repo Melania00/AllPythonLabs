@@ -1,7 +1,5 @@
 from abc import ABC, abstractmethod
 
-from FridgeClass.exceptions.logging import FridgeCapacityError, logged
-
 
 class Fridge(ABC):
     def __init__(self, brand, model, capacity, is_defrosting, energy_efficiency_class, my_special_set):
@@ -14,6 +12,10 @@ class Fridge(ABC):
         self.is_defrosting = is_defrosting
         self.energy_efficiency_class = energy_efficiency_class
         self.my_special_set = my_special_set
+
+    def __iter__(self):
+        """Return an iterator over the features set."""
+        return iter(self.my_special_set)
 
     @abstractmethod
     def turn_on_defrosting(self):
@@ -46,10 +48,3 @@ class Fridge(ABC):
             if isinstance(value, _type):
                 result[key] = value
         return result
-
-    @logged(FridgeCapacityError, mode='console')
-    def get_max_usable_capacity(self):
-        if self.capacity < 0:
-            raise FridgeCapacityError("Invalid capacity")
-        return self.capacity
-

@@ -6,6 +6,7 @@ class FridgeCapacityError(Exception):
     """
     Initialize the exception class for the fridge capacity
     """
+
     def __init__(self, message):
         self.message = message
         super().__init__(self.message)
@@ -34,18 +35,20 @@ def logged(exception, mode):
                     """
                     Log the exception to the console
                     """
-                    logging.exception(str(e))
+                    logging.basicConfig(level=logging.WARNING)
+                    logging.warning(str(e))
                 elif mode == 'file':
-                    logging.basicConfig(filename='error.log', level=logging.ERROR)
+                    logging.basicConfig(filename='error.log', level=logging.WARNING, filemode="w")
                     """
                     Log the exception to the file
                     """
-                    logging.exception(str(e))
+                    logging.warning(str(e))
                 else:
                     """
                     Raise a ValueError if an invalid mode is provided
                     """
                     raise ValueError("Invalid mode. Mode should be 'console' or 'file'.")
+                return FridgeCapacityError
 
         return wrapper
 

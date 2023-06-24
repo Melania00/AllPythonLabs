@@ -1,3 +1,4 @@
+from FridgeClass.exceptions.logging import FridgeCapacityError, logged
 from FridgeClass.models.fridge import Fridge
 
 
@@ -15,7 +16,10 @@ class WineFridge(Fridge):
     def turn_off_defrosting(self):
         return self.is_defrosting(False)
 
+    @logged(FridgeCapacityError, 'file')
     def get_max_usable_capacity(self):
+        if self.capacity <= 0:
+            raise FridgeCapacityError("Invalid capacity")
         return self.capacity
 
     def __repr__(self):
